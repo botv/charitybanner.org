@@ -39,7 +39,7 @@
 				<div class="col-3"></div>
 				<div class="col-6">
 					<h1 class="mt-5">Create your banner</h1>
-					<p class="lead">Complete with pre-defined file paths and responsive navigation!</p>
+					<p class="lead">Complete the form to create a banner</p>
 				</div>
 				<div class="col-3"></div>
 			</div>
@@ -48,63 +48,32 @@
 				<div class="col-6">
 					<form id="bannerForm">
 						<div class="form-group">
-							<label for="siteURL">Your Website</label>
-							<input name="siteURL" type="text" class="form-control" id="siteURL" placeholder="https://my-website.com">
+							<label for="siteURLInput">Your Website</label>
+							<input type="text" class="form-control" id="siteURLInput" placeholder="https://example.com" required
+										 autocomplete="off">
 						</div>
 						<div class="form-group">
-							<label for="charityURL">Charity Website (recommended)</label>
-							<input name="charityURL" type="text" class="form-control" id="charityURL" placeholder="https://charity-website.com">
-						</div>
-						<div class="form-group">
-							<label for="searchProjectsQuery" id="projectLabel">Project (none chosen)</label>
+							<label for="projectInput" id="projectLabel">Charity</label>
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Search for projects" id="searchProjectsQuery">
-								<div class="input-group-append" id="searchProjects">
-									<button class="btn btn-secondary" type="button">
+								<input type="text" class="form-control" placeholder="Search for projects" id="projectInput" required
+											 autocomplete="off">
+								<div class="input-group-append">
+									<button id="searchButton" class="btn btn-secondary" type="button">
 										<i class="fa fa-search"></i>
 									</button>
 								</div>
 							</div>
-							<ul class="list-group" id="searchResults">
-							</ul>
-
-							<!--<select name="charityId" id="inputOrganization" class="form-control">-->
-								<!--<option selected>Choose...</option>-->
-							<!--</select>-->
+							<ul class="list-group" id="searchResults"></ul>
 						</div>
-						<div class="form-row">
-							<div class="form-group col-md-6">
-								<label for="bannerStyle">Banner Style</label>
-								<select name="bannerStyle" id="bannerStyle" class="form-control">
-									<option>vanish</option>
-									<option selected>fixed</option>
-									<option>scroll</option>
-								</select>
-							</div>
-							<div class="form-group col-md-6">
-								<label for="bannerHeight">Banner Height (px)</label>
-								<input name="bannerHeight" type="number" class="form-control" id="bannerHeight" min="150">
-							</div>
+						<div class="form-group">
+							<label for="bannerStyleSelect">Banner Style</label>
+							<select id="bannerStyleSelect" class="form-control col-md-12">
+								<option selected>fixed</option>
+								<option>vanish</option>
+								<option>scroll</option>
+							</select>
 						</div>
-						<div class="form-row">
-							<div class="form-group col-md-3">
-								<label for="bannerPrimaryColor">Primary</label>
-								<input name="bannerPrimaryColor" type="color" class="form-control" value="#ff6666" id="bannerPrimaryColor">
-							</div>
-							<div class="form-group col-md-3">
-								<label for="bannerSecondaryColor">Secondary</label>
-								<input name="bannerSecondaryColor" type="color" class="form-control" value="#883333" id="bannerSecondaryColor">
-							</div>
-							<div class="form-group col-md-3">
-								<label for="bannerTertiaryColor">Tertiary</label>
-								<input name="bannerHighlightColor" type="color" class="form-control" value="#5555ff" id="bannerTertiaryColor">
-							</div>
-							<div class="form-group col-md-3">
-								<label for="bannerTextColor">Text</label>
-								<input name="bannerTextColor" type="color" class="form-control" value="#000000" id="bannerTextColor">
-							</div>
-						</div>
-						<button type="submit" class="btn btn-primary">Create My Banner!</button>
+						<button type="submit" class="btn btn-primary col-md-12">Create My Banner!</button>
 					</form>
 				</div>
 				<div class="col-3"></div>
