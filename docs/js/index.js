@@ -1,3 +1,5 @@
+import builder from "./builder";
+
 let selectedProjectId;
 
 $('#searchButton').click(() => {
@@ -52,5 +54,21 @@ $('#bannerForm').submit(function (e) {
 	const projectId = selectedProjectId;
 	const bannerStyle = $('#bannerStyleSelect').val();
 
-	console.log(siteURL, projectId, bannerStyle);
+	let params = {
+		siteURL: siteURL,
+		projectId: projectId,
+		bannerStyle: bannerStyle
+	};
+	console.log(params);
+
+	const tag = builder.bind(params)();
+
+	$('#resultsModal').modal('show');
+
+	let textNode = document.createTextNode(tag);
+	$('#resultScript').html(document.createTextNode(tag));
+
+	$('#copyCode').click(()=>{
+		// Copy from resultScript here
+	});
 });
