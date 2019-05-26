@@ -18,7 +18,7 @@ function banner(style, project) {
 				.css('color', 'white')
 				.css('font-size', '20px')
 				.css('font-family', '"Righteous", cursive')
-				.css('background-image', `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${project.image.imagelink[0].url}")`)
+				.css('background-image', `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${project.image.imagelink.pop().url}")`)
 				.attr('href', project.projectLink)
 				.attr('target', '_blank')
 				.text(project.title);
@@ -41,7 +41,7 @@ function banner(style, project) {
 				.css('color', 'white')
 				.css('font-size', '20px')
 				.css('font-family', '"Righteous", cursive')
-				.css('background-image', `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${project.image.imagelink[0].url}")`)
+				.css('background-image', `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${project.image.imagelink.pop().url}")`)
 				.attr('href', project.projectLink)
 				.attr('target', '_blank')
 				.text(project.title);
@@ -64,7 +64,7 @@ function banner(style, project) {
 				.css('color', 'white')
 				.css('font-size', '20px')
 				.css('font-family', '"Righteous", cursive')
-				.css('background-image', `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${project.image.imagelink[0].url}")`)
+				.css('background-image', `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${project.image.imagelink.pop().url}")`)
 				.attr('href', project.projectLink)
 				.attr('target', '_blank')
 				.text(project.title);
@@ -75,11 +75,11 @@ function banner(style, project) {
 	return bannerDiv;
 }
 
-$.get(`https://api.globalgiving.org/api/public/projectservice/projects/${projectId}`, {
+$.get(`https://api.globalgiving.org/api/public/projectservice/projects/projectId`, {
 	'api_key': '75b3e155-2250-45c1-8833-19a3e9678fd6'
 }, res => {
 	const project = res.project;
-	const bannerDiv = banner(bannerStyle, project);
+	const bannerDiv = banner('style', project);
 
 	$('head').append('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Righteous&display=swap">');
 	$('body')
