@@ -34,20 +34,27 @@ exports.createBanner = functions.https.onRequest((req, res) => {
 });
 
 exports.analytics = functions.https.onRequest((req, res) => {
-	const {bannerId} = req.query;
+	const {siteURL} = req.query;
 	let db = admin.firestore();
 
-	db.collection('analytics').doc(bannerId).get().then(doc => {
-		if (doc.exists) {
-			res.send(doc.data());
-		} else {
-			res.send({
-				impressions: 'Not found',
-				clicks: 'Not found'
-			});
-		}
-	}).catch(function (error) {
-		console.log('Error getting document:', error);
+	db.collection('banners').where('siteURL', '==', siteURL).get().then(snapshot => {
+		const {docs} = snapshot;
+		if (docs.length < 1) return;
+
+		const bannerId = docs[0].data().id;
+
+		db.collection('analytics').doc(bannerId).get().then(doc => {
+			if (doc.exists) {
+				res.send(doc.data());
+			} else {
+				res.send({
+					impressions: 'Not found',
+					clicks: 'Not found'
+				});
+			}
+		});
+	}).catch(() => {
+		res.status(404).end();
 	});
 });
 
