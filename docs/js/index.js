@@ -22,11 +22,12 @@ $('#searchButton').click(() => {
 		projects = projects.project;
 
 		for (let id in projects) {
-			console.log(projects[id]);
+			const project = projects[id];
+
 			let option = $('<li></li>')
 				.addClass('list-group-item')
 				.css('cursor', 'pointer')
-				.html(projects[id].title);
+				.html(project.title);
 
 			option.hover(
 				() => $(this).css('background-color', '#dddddd'),
@@ -34,8 +35,8 @@ $('#searchButton').click(() => {
 			);
 
 			option.click(() => {
-				selectedProjectId = projects[id].id;
-				$('#projectInput').val(projects[id].title);
+				selectedProjectId = project.id;
+				$('#projectInput').val(project.title);
 				searchResultsContainer.empty();
 			});
 
