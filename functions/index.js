@@ -3,6 +3,7 @@ const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
 exports.banner = functions.https.onRequest((req, res) => {
+	res.set('Access-Control-Allow-Origin', '*');
 	const {projectId, style, bannerId} = req.query;
 	let db = admin.firestore();
 
@@ -10,11 +11,12 @@ exports.banner = functions.https.onRequest((req, res) => {
 		impressions: admin.firestore.FieldValue.increment(1)
 	});
 
-	const script = `function banner(s,e,t){let i;switch(s){case"fixed":i=$('<a id="banner"></a>').css("color","white").css("padding","10px").css("position","fixed").css("top","0").css("right","0").css("left","0").css("height","50px").css("z-index","2147483647").css("background-size","cover").css("background-position","center").css("background-repeat","no-repeat").css("text-align","center").css("font-size","20px").css("font-family",'"Righteous", cursive').css("background-image",\`linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("\${e.image.imagelink.pop().url}")\`).css("box-sizing","border-box").attr("href",e.projectLink).attr("target","_blank").text(e.title),$("body").css("padding-top","50px");break;case"scroll":i=$('<a id="banner"></a>').css("color","white").css("padding","10px").css("position","absolute").css("top","0").css("box-sizing","border-box").css("right","0").css("left","0").css("height","50px").css("z-index","2147483647").css("background-size","cover").css("background-position","center").css("background-repeat","no-repeat").css("text-align","center").css("font-size","20px").css("font-family",'"Righteous", cursive').css("background-image",\`linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("\${e.image.imagelink.pop().url}")\`).attr("href",e.projectLink).attr("target","_blank").text(e.title),$("body").css("padding-top","50px");break;case"vanish":i=$('<a id="banner"></a>').css("color","white").css("padding","10px").css("position","fixed").css("top","20px").css("right","0").css("left","0").css("margin-left","20px").css("margin-right","20px").css("height","50px").css("box-sizing","border-box").css("z-index","2147483647").css("background-size","cover").css("background-position","center").css("background-repeat","no-repeat").css("text-align","center").css("font-size","20px").css("border-radius","5px").css("font-family",'"Righteous", cursive').css("background-image",\`linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("\${e.image.imagelink.pop().url}")\`).attr("href",e.projectLink).attr("target","_blank").text(e.title),setTimeout(()=>{$("body")[0].onmousewheel=(()=>{i.fadeOut(500,()=>{i.remove()})})},3e3)}return i.click(()=>{$.get("https://us-central1-charity-banner.cloudfunctions.net/tagWasClicked",{bannerId:t})}),i}$.get("https://api.globalgiving.org/api/public/projectservice/projects/${projectId}",{api_key:"75b3e155-2250-45c1-8833-19a3e9678fd6"},s=>{const e=banner("${style}",s.project,"${bannerId}");$("head").append('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Righteous&display=swap">'),$("body").prepend(e)},"json");`;
+	const script = `function banner(s,e,t){const c=$("body");let i;switch(s){case"fixed":i=$('<a id="banner"></a>').css("color","white").css("padding","10px").css("position","fixed").css("top","0").css("right","0").css("left","0").css("height","50px").css("z-index","2147483647").css("background-size","cover").css("background-position","center").css("background-repeat","no-repeat").css("text-align","center").css("font-size","20px").css("font-family",'"Righteous", cursive').css("background-image",\`linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("\${e.image.imagelink.pop().url}")\`).css("box-sizing","border-box").attr("href",e.projectLink).attr("target","_blank").text(e.title),c.css("padding-top","50px");break;case"scroll":i=$('<a id="banner"></a>').css("color","white").css("padding","10px").css("position","absolute").css("top","0").css("box-sizing","border-box").css("right","0").css("left","0").css("height","50px").css("z-index","2147483647").css("background-size","cover").css("background-position","center").css("background-repeat","no-repeat").css("text-align","center").css("font-size","20px").css("font-family",'"Righteous", cursive').css("background-image",\`linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("\${e.image.imagelink.pop().url}")\`).attr("href",e.projectLink).attr("target","_blank").text(e.title),c.css("padding-top","50px");break;case"vanish":i=$('<a id="banner"></a>').css("color","white").css("padding","10px").css("position","fixed").css("top","20px").css("right","0").css("left","0").css("margin-left","20px").css("margin-right","20px").css("height","50px").css("box-sizing","border-box").css("z-index","2147483647").css("background-size","cover").css("background-position","center").css("background-repeat","no-repeat").css("text-align","center").css("font-size","20px").css("border-radius","5px").css("font-family",'"Righteous", cursive').css("background-image",\`linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("\${e.image.imagelink.pop().url}")\`).attr("href",e.projectLink).attr("target","_blank").text(e.title),setTimeout(()=>{$("body")[0].onmousewheel=(()=>{i.fadeOut(500,()=>{i.remove()})})},3e3)}return i.click(()=>{$.get("https://us-central1-charity-banner.cloudfunctions.net/bannerWasClicked",{bannerId:t})}),i}$.get("https://api.globalgiving.org/api/public/projectservice/projects/${projectId}",{api_key:"75b3e155-2250-45c1-8833-19a3e9678fd6"},s=>{const e=e("${style}",s.project,"${bannerId}");$("head").append('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Righteous&display=swap">'),$("body").prepend(e)},"json");`;
 	res.send(script);
 });
 
 exports.createBanner = functions.https.onRequest((req, res) => {
+	res.set('Access-Control-Allow-Origin', '*');
 	const {bannerId, projectId, siteURL, style} = req.query;
 	let db = admin.firestore();
 
@@ -30,10 +32,11 @@ exports.createBanner = functions.https.onRequest((req, res) => {
 		clicks: 0
 	});
 
-	res.end()
+	res.end();
 });
 
 exports.analytics = functions.https.onRequest((req, res) => {
+	res.set('Access-Control-Allow-Origin', '*');
 	const {siteURL} = req.query;
 	let db = admin.firestore();
 
@@ -59,6 +62,7 @@ exports.analytics = functions.https.onRequest((req, res) => {
 });
 
 exports.bannerWasClicked = functions.https.onRequest((req, res) => {
+	res.set('Access-Control-Allow-Origin', '*');
 	const {bannerId} = req.query;
 	let db = admin.firestore();
 

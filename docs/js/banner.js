@@ -1,8 +1,10 @@
-function banner(style, project, tagId) {
-	let bannerDiv;
+function banner(style, project, bannerId) {
+	const body = $('body');
+	let banner;
+
 	switch (style) {
 		case 'fixed':
-			bannerDiv = $('<a id="banner"></a>')
+			banner = $('<a id="banner"></a>')
 				.css('color', 'white')
 				.css('padding', '10px')
 				.css('position', 'fixed')
@@ -23,11 +25,11 @@ function banner(style, project, tagId) {
 				.attr('target', '_blank')
 				.text(project.title);
 
-			$('body').css('padding-top', `50px`);
+			body.css('padding-top', `50px`);
 
 			break;
 		case 'scroll':
-			bannerDiv = $('<a id="banner"></a>')
+			banner = $('<a id="banner"></a>')
 				.css('color', 'white')
 				.css('padding', '10px')
 				.css('position', 'absolute')
@@ -48,11 +50,11 @@ function banner(style, project, tagId) {
 				.attr('target', '_blank')
 				.text(project.title);
 
-			$('body').css('padding-top', `50px`);
+			body.css('padding-top', `50px`);
 
 			break;
 		case 'vanish':
-			bannerDiv = $('<a id="banner"></a>')
+			banner = $('<a id="banner"></a>')
 				.css('color', 'white')
 				.css('padding', '10px')
 				.css('position', 'fixed')
@@ -78,27 +80,28 @@ function banner(style, project, tagId) {
 
 			setTimeout(()=> {
 				$('body')[0].onmousewheel = () => {
-					bannerDiv.fadeOut(500, () => {
-						bannerDiv.remove();
+					banner.fadeOut(500, () => {
+						banner.remove();
 					});
 				};
 			}, 3000);
 
 			break;
 	}
-	bannerDiv.click(()=>{
-		$.get('https://us-central1-charity-banner.cloudfunctions.net/bannerWasClicked', {tagId: tagId});
+
+	banner.click(()=>{
+		$.get('https://us-central1-charity-banner.cloudfunctions.net/bannerWasClicked', {bannerId});
 	});
 
-	return bannerDiv;
+	return banner;
 }
 
 $.get('https://api.globalgiving.org/api/public/projectservice/projects/projectId', {
 	'api_key': '75b3e155-2250-45c1-8833-19a3e9678fd6'
 }, res => {
 	const project = res.project;
-	const bannerDiv = banner('style', project, 'tagId');
+	const banner = banner('style', project, 'bannerId');
 
 	$('head').append('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Righteous&display=swap">');
-	$('body').prepend(bannerDiv);
+	$('body').prepend(banner);
 }, 'json');
