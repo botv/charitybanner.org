@@ -1,5 +1,5 @@
 export default function builder(callback) {
-	$.get('https://us-central1-charity-banner.cloudfunctions.net/getAllTagIds', (tagIds)=>{
+	$.get('https://us-central1-charity-banner.cloudfunctions.net/getAllTagIds', (tagIds) => {
 		console.log(tagIds);
 
 		function makeId(length) {
@@ -17,13 +17,13 @@ export default function builder(callback) {
 		while (tagIds.includes(id)) id = makeId(30);
 
 		$.get('https://us-central1-charity-banner.cloudfunctions.net/initAnalytics',
-			{id: id}
+			{bannerId: bannerId}
 		);
 
 		const url = new URL('https://us-central1-charity-banner.cloudfunctions.net/banner');
 		url.searchParams.set('projectId', this.projectId);
 		url.searchParams.set('style', this.style);
-		url.searchParams.set('tagId', id);
+		url.searchParams.set('bannerId', id);
 
 		callback(`<script src="${url.href}" defer></script>`, id);
 	});
