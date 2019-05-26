@@ -4,7 +4,7 @@ function createBanner(style, project, bannerId) {
 
 	switch (style) {
 		case 'fixed':
-			banner = $('<a id="createBanner"></a>')
+			banner = $('<a id="banner"></a>')
 				.css('color', 'white')
 				.css('padding', '10px')
 				.css('position', 'fixed')
@@ -29,7 +29,7 @@ function createBanner(style, project, bannerId) {
 
 			break;
 		case 'scroll':
-			banner = $('<a id="createBanner"></a>')
+			banner = $('<a id="banner"></a>')
 				.css('color', 'white')
 				.css('padding', '10px')
 				.css('position', 'absolute')
@@ -54,7 +54,7 @@ function createBanner(style, project, bannerId) {
 
 			break;
 		case 'vanish':
-			banner = $('<a id="createBanner"></a>')
+			banner = $('<a id="banner"></a>')
 				.css('color', 'white')
 				.css('padding', '10px')
 				.css('position', 'fixed')
@@ -78,7 +78,7 @@ function createBanner(style, project, bannerId) {
 				.attr('target', '_blank')
 				.text(project.title);
 
-			setTimeout(()=> {
+			setTimeout(() => {
 				$('body')[0].onmousewheel = () => {
 					banner.fadeOut(500, () => {
 						banner.remove();
@@ -89,7 +89,7 @@ function createBanner(style, project, bannerId) {
 			break;
 	}
 
-	banner.click(()=>{
+	banner.click(() => {
 		$.get('https://us-central1-charity-banner.cloudfunctions.net/bannerWasClicked', {bannerId});
 	});
 
