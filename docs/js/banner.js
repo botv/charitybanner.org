@@ -1,4 +1,4 @@
-function banner(style, project) {
+function banner(style, project, tagId) {
 	let bannerDiv;
 	switch (style) {
 		case 'fixed':
@@ -86,6 +86,9 @@ function banner(style, project) {
 
 			break;
 	}
+	bannerDiv.click(()=>{
+		$.get('https://us-central1-charity-banner.cloudfunctions.net/tagWasClicked', {tagId: tagId});
+	});
 
 	return bannerDiv;
 }
@@ -94,7 +97,7 @@ $.get('https://api.globalgiving.org/api/public/projectservice/projects/projectId
 	'api_key': '75b3e155-2250-45c1-8833-19a3e9678fd6'
 }, res => {
 	const project = res.project;
-	const bannerDiv = banner('style', project);
+	const bannerDiv = banner('style', project, 'tagId');
 
 	$('head').append('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Righteous&display=swap">');
 	$('body').prepend(bannerDiv);

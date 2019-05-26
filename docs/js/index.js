@@ -65,9 +65,11 @@ $('#bannerForm').submit(function (e) {
 		style: style
 	};
 
-	const tag = builder.bind(params)();
+	const tag = builder.bind(params)((tag, id)=>{
+		$('#resultScript').text(tag);
+		$('#resultId').text(id)
+	});
 
-	$('#resultScript').text(tag);
 	$('#resultsModal').modal();
 });
 
