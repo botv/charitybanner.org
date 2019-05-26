@@ -15,17 +15,22 @@ exports.banner = functions.https.onRequest((req, res) => {
 });
 
 exports.createBanner = functions.https.onRequest((req, res) => {
-	const {bannerId} = req.query;
+	const {bannerId, projectId, siteURL, style} = req.query;
 	let db = admin.firestore();
 
 	db.collection('banners').doc(bannerId).set({
-		id: bannerId
+		id: bannerId,
+		projectId,
+		siteURL,
+		style
 	});
 
 	db.collection('analytics').doc(bannerId).set({
 		impressions: 0,
 		clicks: 0
 	});
+
+	res.end()
 });
 
 exports.analytics = functions.https.onRequest((req, res) => {

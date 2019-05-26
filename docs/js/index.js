@@ -1,6 +1,24 @@
-import builder from './builder';
+import uniqid from 'uniqid';
 
 let selectedProjectId;
+
+function createBannerTag(projectId, siteURL, style) {
+	const bannerId = uniqid();
+
+	$.get('https://us-central1-charity-banner.cloudfunctions.net/createBanner', {
+		bannerId,
+		projectId,
+		siteURL,
+		style
+	});
+
+	const url = new URL('https://us-central1-charity-banner.cloudfunctions.net/banner');
+	url.searchParams.set('projectId', projectId);
+	url.searchParams.set('style', style);
+	url.searchParams.set('bannerId', bannerId);
+
+	return `<script src="${url.href}" defer></script>`;
+}
 
 $('#searchButton').click(() => {
 	let query = $('#projectInput').val();
@@ -52,24 +70,15 @@ $('#searchButton').click(() => {
 	}, 'json');
 });
 
-$('#bannerForm').submit(function (e) {
+$('#bannerForm').submit(e => {
 	e.preventDefault();
 
 	const siteURL = $('#siteURLInput').val();
 	const projectId = selectedProjectId;
 	const style = $('#styleSelect').val();
+	const bannerTag = createBannerTag(projectId, siteURL, style);
 
-	let params = {
-		siteURL: siteURL,
-		projectId: projectId,
-		style: style
-	};
-
-	const tag = builder.bind(params)((tag, id)=>{
-		$('#resultScript').text(tag);
-		$('#resultId').text(id)
-	});
-
+	$('#resultScript').text(bannerTag);
 	$('#resultsModal').modal();
 });
 
