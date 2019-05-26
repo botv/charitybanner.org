@@ -69,6 +69,14 @@ $('#bannerForm').submit(function (e) {
 	$('#resultScript').html(document.createTextNode(tag));
 
 	$('#copyCode').click(()=>{
-		// Copy from resultScript here
+		navigator.permissions.query({name: "clipboard-write"}).then(result => {
+			if (result.state == "granted" || result.state == "prompt") {
+				navigator.clipboard.writeText(tag).then(function() {
+					console.log('success');
+				}, function(e) {
+					console.log(e);
+				});
+			}
+		});
 	});
 });
