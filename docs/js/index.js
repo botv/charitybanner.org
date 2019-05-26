@@ -26,21 +26,26 @@ $('#searchButton').click(() => {
 		for (let id in projects) {
 			const project = projects[id];
 
-			let option = $('<li></li>')
-				.addClass('list-group-item')
-				.css('cursor', 'pointer')
-				.html(project.title);
+			let option = $('<li></li>');
 
-			option.hover(
-				() => $(this).css('background-color', '#dddddd'),
-				() => $(this).css('background-color', '#ffffff')
-			);
+			option.addClass('list-group-item');
+			option.css('cursor', 'pointer');
+			option.html(project.title);
 
 			option.click(() => {
 				selectedProjectId = project.id;
 				$('#projectInput').val(project.title);
 				searchResultsContainer.empty();
 			});
+
+			option.hover(
+				function () {
+					$(this).css('background-color', '#eeeeee');
+				},
+				function () {
+					$(this).css('background-color', '#ffffff');
+				}
+			);
 
 			searchResultsContainer.append(option);
 		}
@@ -64,12 +69,12 @@ $('#bannerForm').submit(function (e) {
 
 	$('#resultScript').text(tag);
 	$('#resultsModal').modal();
+});
 
-	$('#copyCode').click(() => {
-		navigator.permissions.query({name: 'clipboard-write'}).then(result => {
-			if (result.state === 'granted' || result.state === 'prompt') {
-				navigator.clipboard.writeText(tag)
-			}
-		});
+$('#copyCode').click(() => {
+	navigator.permissions.query({name: 'clipboard-write'}).then(result => {
+		if (result.state === 'granted' || result.state === 'prompt') {
+			navigator.clipboard.writeText(tag);
+		}
 	});
 });
