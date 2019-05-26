@@ -14,21 +14,6 @@ exports.banner = functions.https.onRequest((req, res) => {
 	res.send(script);
 });
 
-exports.getAllTagIds = functions.https.onRequest((req, res) => {
-	res.set('Access-Control-Allow-Origin', '*');
-	let db = admin.firestore();
-
-	db.collection('config').doc('tagIds').get().then(function (doc) {
-		if (doc.exists) {
-			let tagIds = doc.data().tagIds;
-			res.send(tagIds);
-		} else {
-			console.log('No such document!');
-		}
-
-	});
-});
-
 exports.initAnalytics = functions.https.onRequest((req, res) => {
 	const {bannerId} = req.query;
 	let db = admin.firestore();
@@ -44,17 +29,13 @@ exports.initAnalytics = functions.https.onRequest((req, res) => {
 });
 
 exports.analytics = functions.https.onRequest((req, res) => {
-	res.set('Access-Control-Allow-Origin', '*');
-
 	const {bannerId} = req.query;
 	let db = admin.firestore();
 
-	db.collection('tags').doc(bannerId).get().then(function (doc) {
+	db.collection('analytics').doc(bannerId).get().then(doc => {
 		if (doc.exists) {
-			console.log(doc.data());
 			res.send(doc.data());
 		} else {
-			console.log('No such document!');
 			res.send({
 				impressions: 'Not found',
 				clicks: 'Not found'
@@ -65,11 +46,13 @@ exports.analytics = functions.https.onRequest((req, res) => {
 	});
 });
 
-exports.tagWasClicked = functions.https.onRequest((req, res) => {
-	const {tagId} = req.query;
+exports.bannerWasClicked = functions.https.onRequest((req, res) => {
+	const {bannerId} = req.query;
 	let db = admin.firestore();
 
-	db.collection('tags').doc(tagId).update({
+	db.collection('analytics').doc(bannerId).update({
 		clicks: admin.firestore.FieldValue.increment(1)
 	});
+
+	res.end();
 });

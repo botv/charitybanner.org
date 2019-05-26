@@ -87,7 +87,7 @@ function banner(style, project, tagId) {
 			break;
 	}
 	bannerDiv.click(()=>{
-		$.get('https://us-central1-charity-banner.cloudfunctions.net/tagWasClicked', {tagId: tagId});
+		$.get('https://us-central1-charity-banner.cloudfunctions.net/bannerWasClicked', {tagId: tagId});
 	});
 
 	return bannerDiv;
