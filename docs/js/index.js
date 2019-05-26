@@ -80,12 +80,12 @@ $('#bannerForm').submit(e => {
 
 	$('#resultScript').text(bannerTag);
 	$('#resultsModal').modal();
-});
 
-$('#copyCode').click(() => {
-	navigator.permissions.query({name: 'clipboard-write'}).then(result => {
-		if (result.state === 'granted' || result.state === 'prompt') {
-			navigator.clipboard.writeText(tag);
-		}
+	$('#copyCodeButton').click(() => {
+		navigator.permissions.query({name: 'clipboard-write'}).then(result => {
+			if (result.state === 'granted' || result.state === 'prompt') {
+				navigator.clipboard.writeText(bannerTag);
+			}
+		});
 	});
 });
