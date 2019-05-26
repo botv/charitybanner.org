@@ -18,7 +18,7 @@ exports.createBanner = functions.https.onRequest((req, res) => {
 	const {bannerId} = req.query;
 	let db = admin.firestore();
 
-	db.collection('banners').add({
+	db.collection('banners').doc(bannerId).set({
 		id: bannerId
 	});
 
