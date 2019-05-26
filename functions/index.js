@@ -30,14 +30,14 @@ exports.getAllTagIds = functions.https.onRequest((req, res) => {
 });
 
 exports.initAnalytics = functions.https.onRequest((req, res) => {
-	const {id} = req.query;
+	const {bannerId} = req.query;
 	let db = admin.firestore();
 
 	db.collection('config').doc('tagIds').update({
-		tagIds: admin.firestore.FieldValue.arrayUnion(id)
+		tagIds: admin.firestore.FieldValue.arrayUnion(bannerId)
 	});
 
-	db.collection('tags').doc(id).set({
+	db.collection('tags').doc(bannerId).set({
 		impressions: 0,
 		clicks: 0
 	});
