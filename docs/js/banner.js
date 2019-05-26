@@ -23,6 +23,8 @@ function banner(style, project) {
 				.attr('target', '_blank')
 				.text(project.title);
 
+			$('body').css('padding-top', `50px`);
+
 			break;
 		case 'scroll':
 			bannerDiv = $('<a id="banner"></a>')
@@ -46,6 +48,8 @@ function banner(style, project) {
 				.attr('target', '_blank')
 				.text(project.title);
 
+			$('body').css('padding-top', `50px`);
+
 			break;
 		case 'vanish':
 			bannerDiv = $('<a id="banner"></a>')
@@ -55,8 +59,8 @@ function banner(style, project) {
 				.css('top', '20px')
 				.css('right', '0')
 				.css('left', '0')
-				.css('margin-left', '10%')
-				.css('margin-right', '10%')
+				.css('margin-left', '20px')
+				.css('margin-right', '20px')
 				.css('height', '50px')
 				.css('box-sizing', 'border-box')
 				.css('z-index', '2147483647')
@@ -72,11 +76,13 @@ function banner(style, project) {
 				.attr('target', '_blank')
 				.text(project.title);
 
-			$('body').on('scroll', ()=>{
-				bannerDiv.fadeOut(0.5, ()=>{
-					bannerDiv.remove();
-				})
-			});
+			setTimeout(()=> {
+				$('body')[0].onscroll = () => {
+					bannerDiv.fadeOut(500, () => {
+						bannerDiv.remove();
+					});
+				};
+			}, 3000);
 
 			break;
 	}
@@ -91,7 +97,5 @@ $.get('https://api.globalgiving.org/api/public/projectservice/projects/projectId
 	const bannerDiv = banner('style', project);
 
 	$('head').append('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Righteous&display=swap">');
-	$('body')
-		.prepend(bannerDiv)
-		.css('padding-top', `50px`);
+	$('body').prepend(bannerDiv);
 }, 'json');
