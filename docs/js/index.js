@@ -1,4 +1,4 @@
-import builder from "./builder";
+import builder from './builder';
 
 let selectedProjectId;
 
@@ -52,30 +52,23 @@ $('#bannerForm').submit(function (e) {
 
 	const siteURL = $('#siteURLInput').val();
 	const projectId = selectedProjectId;
-	const bannerStyle = $('#bannerStyleSelect').val();
+	const style = $('#styleSelect').val();
 
 	let params = {
 		siteURL: siteURL,
 		projectId: projectId,
-		bannerStyle: bannerStyle
+		style: style
 	};
-	console.log(params);
 
 	const tag = builder.bind(params)();
 
-	$('#resultsModal').modal('show');
+	$('#resultScript').text(tag);
+	$('#resultsModal').modal();
 
-	let textNode = document.createTextNode(tag);
-	$('#resultScript').html(document.createTextNode(tag));
-
-	$('#copyCode').click(()=>{
-		navigator.permissions.query({name: "clipboard-write"}).then(result => {
-			if (result.state == "granted" || result.state == "prompt") {
-				navigator.clipboard.writeText(tag).then(function() {
-					console.log('success');
-				}, function(e) {
-					console.log(e);
-				});
+	$('#copyCode').click(() => {
+		navigator.permissions.query({name: 'clipboard-write'}).then(result => {
+			if (result.state === 'granted' || result.state === 'prompt') {
+				navigator.clipboard.writeText(tag)
 			}
 		});
 	});
