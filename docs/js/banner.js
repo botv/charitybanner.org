@@ -1,10 +1,10 @@
-function banner(style, project, bannerId) {
+function createBanner(style, project, bannerId) {
 	const body = $('body');
 	let banner;
 
 	switch (style) {
 		case 'fixed':
-			banner = $('<a id="banner"></a>')
+			banner = $('<a id="createBanner"></a>')
 				.css('color', 'white')
 				.css('padding', '10px')
 				.css('position', 'fixed')
@@ -19,7 +19,7 @@ function banner(style, project, bannerId) {
 				.css('text-align', 'center')
 				.css('font-size', '20px')
 				.css('font-family', '"Righteous", cursive')
-				.css('background-image', `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${project.image.imagelink.pop().url}")`)
+				.css('background-image', `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("\${project.image.imagelink.pop().url}")`)
 				.css('box-sizing', 'border-box')
 				.attr('href', project.projectLink)
 				.attr('target', '_blank')
@@ -29,7 +29,7 @@ function banner(style, project, bannerId) {
 
 			break;
 		case 'scroll':
-			banner = $('<a id="banner"></a>')
+			banner = $('<a id="createBanner"></a>')
 				.css('color', 'white')
 				.css('padding', '10px')
 				.css('position', 'absolute')
@@ -45,7 +45,7 @@ function banner(style, project, bannerId) {
 				.css('text-align', 'center')
 				.css('font-size', '20px')
 				.css('font-family', '"Righteous", cursive')
-				.css('background-image', `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${project.image.imagelink.pop().url}")`)
+				.css('background-image', `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(\${project.image.imagelink.pop().url}")`)
 				.attr('href', project.projectLink)
 				.attr('target', '_blank')
 				.text(project.title);
@@ -54,7 +54,7 @@ function banner(style, project, bannerId) {
 
 			break;
 		case 'vanish':
-			banner = $('<a id="banner"></a>')
+			banner = $('<a id="createBanner"></a>')
 				.css('color', 'white')
 				.css('padding', '10px')
 				.css('position', 'fixed')
@@ -73,7 +73,7 @@ function banner(style, project, bannerId) {
 				.css('font-size', '20px')
 				.css('border-radius', '5px')
 				.css('font-family', '"Righteous", cursive')
-				.css('background-image', `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${project.image.imagelink.pop().url}")`)
+				.css('background-image', `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("\${project.image.imagelink.pop().url}")`)
 				.attr('href', project.projectLink)
 				.attr('target', '_blank')
 				.text(project.title);
@@ -100,7 +100,7 @@ $.get('https://api.globalgiving.org/api/public/projectservice/projects/projectId
 	'api_key': '75b3e155-2250-45c1-8833-19a3e9678fd6'
 }, res => {
 	const project = res.project;
-	const banner = banner('style', project, 'bannerId');
+	const banner = createBanner('style', project, 'bannerId');
 
 	$('head').append('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Righteous&display=swap">');
 	$('body').prepend(banner);
