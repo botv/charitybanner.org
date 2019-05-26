@@ -19,7 +19,7 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/main.css">
 
-		<script src="https://us-central1-charity-banner.cloudfunctions.net/banner?siteURL=https%3A%2F%2Fbenbotvinick.com&projectId=6546&style=fixed" defer></script>
+		<script src="https://us-central1-charity-banner.cloudfunctions.net/banner?projectId=34079&style=scroll" defer></script>
 	</head>
 
 	<body>
@@ -82,6 +82,98 @@
 			</div>
 		</div>
 
+		<div class="container mb-5">
+			<div class="row">
+				<div class="col-3"></div>
+				<div class="col-6">
+					<h1 class="mt-5">Create your banner</h1>
+					<p class="lead">Complete the form to create a banner</p>
+				</div>
+				<div class="col-3"></div>
+			</div>
+			<div class="row">
+				<div class="col-3"></div>
+				<div class="col-6">
+					<form id="bannerForm">
+						<div class="form-group">
+							<label for="siteURLInput">Your Website</label>
+							<input type="text" class="form-control" id="siteURLInput" placeholder="https://example.com" required
+								   autocomplete="off">
+						</div>
+						<div class="form-group">
+							<label for="projectInput" id="projectLabel">Charity</label>
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Search for projects" id="projectInput" required
+									   autocomplete="off">
+								<div class="input-group-append">
+									<button id="searchButton" class="btn btn-secondary" type="button">
+										<i class="fa fa-search"></i>
+									</button>
+								</div>
+							</div>
+							<ul class="list-group" id="searchResults"></ul>
+						</div>
+						<div class="form-group">
+							<label for="styleSelect">Banner Style</label>
+							<select id="styleSelect" class="form-control col-md-12">
+								<option selected>fixed</option>
+								<option>vanish</option>
+								<option>scroll</option>
+							</select>
+						</div>
+						<button type="submit" class="btn btn-primary col-md-12">Create My Banner!</button>
+					</form>
+				</div>
+				<div class="col-3"></div>
+			</div>
+		</div>
+
+		<div class="container mb-5">
+			<div class="row">
+				<div class="col-3"></div>
+				<div class="col-6">
+					<h1 class="mt-5">Create your banner</h1>
+					<p class="lead">Complete the form to create a banner</p>
+				</div>
+				<div class="col-3"></div>
+			</div>
+			<div class="row">
+				<div class="col-3"></div>
+				<div class="col-6">
+					<form id="bannerForm">
+						<div class="form-group">
+							<label for="siteURLInput">Your Website</label>
+							<input type="text" class="form-control" id="siteURLInput" placeholder="https://example.com" required
+								   autocomplete="off">
+						</div>
+						<div class="form-group">
+							<label for="projectInput" id="projectLabel">Charity</label>
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Search for projects" id="projectInput" required
+									   autocomplete="off">
+								<div class="input-group-append">
+									<button id="searchButton" class="btn btn-secondary" type="button">
+										<i class="fa fa-search"></i>
+									</button>
+								</div>
+							</div>
+							<ul class="list-group" id="searchResults"></ul>
+						</div>
+						<div class="form-group">
+							<label for="styleSelect">Banner Style</label>
+							<select id="styleSelect" class="form-control col-md-12">
+								<option selected>fixed</option>
+								<option>vanish</option>
+								<option>scroll</option>
+							</select>
+						</div>
+						<button type="submit" class="btn btn-primary col-md-12">Create My Banner!</button>
+					</form>
+				</div>
+				<div class="col-3"></div>
+			</div>
+		</div>
+
 		<!-- Modal -->
 		<div class="modal fade" id="resultsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered" role="document">
@@ -93,7 +185,7 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						Copy and paste this script tag into your html to display your banner:
+						Copy and paste this script tag into the head of your to display your banner:
 						<br>
 						<code id="resultScript"></code>
 					</div>

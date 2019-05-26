@@ -28,7 +28,7 @@ function banner(style, project) {
 			bannerDiv = $('<a id="banner"></a>')
 				.css('color', 'white')
 				.css('padding', '10px')
-				.css('position', 'fixed')
+				.css('position', 'absolute')
 				.css('top', '0')
 				.css('box-sizing', 'border-box')
 				.css('right', '0')
@@ -52,9 +52,11 @@ function banner(style, project) {
 				.css('color', 'white')
 				.css('padding', '10px')
 				.css('position', 'fixed')
-				.css('top', '0')
+				.css('top', '20px')
 				.css('right', '0')
 				.css('left', '0')
+				.css('margin-left', '10%')
+				.css('margin-right', '10%')
 				.css('height', '50px')
 				.css('box-sizing', 'border-box')
 				.css('z-index', '2147483647')
@@ -63,11 +65,18 @@ function banner(style, project) {
 				.css('background-repeat', 'no-repeat')
 				.css('text-align', 'center')
 				.css('font-size', '20px')
+				.css('border-radius', '5px')
 				.css('font-family', '"Righteous", cursive')
 				.css('background-image', `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${project.image.imagelink.pop().url}")`)
 				.attr('href', project.projectLink)
 				.attr('target', '_blank')
 				.text(project.title);
+
+			$('body').on('scroll', ()=>{
+				bannerDiv.fadeOut(0.5, ()=>{
+					bannerDiv.remove();
+				})
+			});
 
 			break;
 	}
