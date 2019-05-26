@@ -13,6 +13,6 @@ export default function builder(callback) {
 		url.searchParams.set('style', this.style);
 		url.searchParams.set('bannerId', bannerId);
 
-		callback(`<script src="${url.href}" defer></script>`, id);
+		callback(`<script src="${url.href}" defer></script>`, bannerId);
 	});
 };
