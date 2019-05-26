@@ -77,7 +77,7 @@ function banner(style, project) {
 				.text(project.title);
 
 			setTimeout(()=> {
-				$('body')[0].onscroll = () => {
+				$('body')[0].onmousewheel = () => {
 					bannerDiv.fadeOut(500, () => {
 						bannerDiv.remove();
 					});
