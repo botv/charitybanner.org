@@ -19,7 +19,7 @@ function createBanner(style, project, bannerId) {
 				.css('text-align', 'center')
 				.css('font-size', '20px')
 				.css('font-family', '"Righteous", cursive')
-				.css('background-image', `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("\${project.image.imagelink.pop().url}")`)
+				.css('background-image', `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${project.image.imagelink.pop().url}")`)
 				.css('box-sizing', 'border-box')
 				.attr('href', project.projectLink)
 				.attr('target', '_blank')
@@ -45,7 +45,7 @@ function createBanner(style, project, bannerId) {
 				.css('text-align', 'center')
 				.css('font-size', '20px')
 				.css('font-family', '"Righteous", cursive')
-				.css('background-image', `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(\${project.image.imagelink.pop().url}")`)
+				.css('background-image', `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${project.image.imagelink.pop().url}")`)
 				.attr('href', project.projectLink)
 				.attr('target', '_blank')
 				.text(project.title);
@@ -73,7 +73,7 @@ function createBanner(style, project, bannerId) {
 				.css('font-size', '20px')
 				.css('border-radius', '5px')
 				.css('font-family', '"Righteous", cursive')
-				.css('background-image', `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("\${project.image.imagelink.pop().url}")`)
+				.css('background-image', `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${project.image.imagelink.pop().url}")`)
 				.attr('href', project.projectLink)
 				.attr('target', '_blank')
 				.text(project.title);
