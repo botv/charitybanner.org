@@ -3,7 +3,7 @@ import uniqid from 'uniqid'
 export default function builder(callback) {
 	const bannerId = uniqid();
 
-	$.get('https://us-central1-charity-banner.cloudfunctions.net/initAnalytics',
+	$.get('https://us-central1-charity-banner.cloudfunctions.net/createBanner',
 		{bannerId: bannerId}
 	);
 
